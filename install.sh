@@ -113,11 +113,19 @@ echo_info "Creating .env configuration file..."
 # Prompt user for essential variables
 read -p "Enter InfluxDB URL: " INFLUX_URL
 read -s -p "Enter InfluxDB Token: " INFLUX_TOKEN
+read -p "Enter InfluxDB Org [default: ForenWAF]: " INFLUX_ORG
+INFLUX_ORG=${INFLUX_ORG:-ForenWAF}
+read -p "Enter InfluxDB Bucket Name [default: waf_data]: " INFLUX_BUCKET
+INFLUX_BUCKET=${INFLUX_BUCKET:-waf_data}
+read -p "Enter InfluxDB Predictions Bucket Name [default: waf_predictions]: " INFLUX_PREDICTIONS_BUCKET
+INFLUX_PREDICTIONS_BUCKET=${INFLUX_PREDICTIONS_BUCKET:-waf_predictions}
 echo # Newline after password input
 read -s -p "Enter Gemini API Key: " GEMINI_API_KEY
 echo # Newline after password input
 read -p "Enter ModSecurity Log Path [default: $MODSEC_LOG_DEFAULT]: " MODSEC_LOG_PATH
 MODSEC_LOG_PATH=${MODSEC_LOG_PATH:-$MODSEC_LOG_DEFAULT}
+read -p "Enter polling interval in seconds [default: 10]: " POLL_INTERVAL
+POLL_INTERVAL=${POLL_INTERVAL:-10}
 
 # Create .env file
 cat << EOF > "$INSTALL_DIR/.env"
