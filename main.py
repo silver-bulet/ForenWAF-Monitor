@@ -53,6 +53,7 @@ def main():
             if logs:
                 exported = influx.export_log_entries(logs)
                 logger.debug(f"Exported {len(logs)} logs")  # Reduced verbosity
+                
          # Optional: Run Gemini analysis on recent logs
         if settings.RUN_INITIAL_ANALYSIS and exported > 0:
             logger.info("Running Gemini analysis on latest data...")
