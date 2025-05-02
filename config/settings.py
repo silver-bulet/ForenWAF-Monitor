@@ -7,9 +7,9 @@ class Settings:
     # Settings InfluxDB
     INFLUX_URL = os.getenv("INFLUX_URL", "")
     INFLUX_TOKEN = os.getenv("INFLUX_TOKEN", "")
-    INFLUX_ORG = os.getenv("INFLUX_ORG", "ForenWAF")
-    INFLUX_BUCKET = os.getenv("INFLUX_BUCKET", "waf_data")
-    INFLUX_PREDICTIONS_BUCKET = os.getenv("INFLUX_PREDICTIONS_BUCKET", "waf_predictions")
+    INFLUX_ORG = os.getenv("INFLUX_ORG", "")
+    INFLUX_BUCKET = os.getenv("INFLUX_BUCKET", "")
+    INFLUX_PREDICTIONS_BUCKET = os.getenv("INFLUX_PREDICTIONS_BUCKET", "")
 
     # Settings Gemini AI
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
