@@ -1,0 +1,726 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 27,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "beeriqsgfmtxcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 2500
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 5000
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0-86898",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "beeriqsgfmtxcb"
+          },
+          "query": "from(bucket: \"waf_data\")\r\n  |> range(start: -30d) \r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"waf_stats\")  \r\n  |> filter(fn: (r) => r[\"_field\"] == \"count\")           \r\n  |> group()                                            \r\n  |> sum()\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Attacks Last 30 Days",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "beeriqsgfmtxcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 625
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1250
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0-86898",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "beeriqsgfmtxcb"
+          },
+          "query": "from(bucket: \"waf_data\")\r\n  |> range(start: -7d) \r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"waf_stats\")  \r\n  |> filter(fn: (r) => r[\"_field\"] == \"count\")           \r\n  |> group()                                            \r\n  |> sum()\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Attacks Last week",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "beeriqsgfmtxcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 90
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 180
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0-86898",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "beeriqsgfmtxcb"
+          },
+          "query": "from(bucket: \"waf_data\")\r\n  |> range(start: -24h) \r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"waf_stats\")  \r\n  |> filter(fn: (r) => r[\"_field\"] == \"count\")           \r\n  |> group()                                            \r\n  |> sum()\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Attacks Last 24H",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "beeriqsgfmtxcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 4
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 8
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0-86898",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "beeriqsgfmtxcb"
+          },
+          "query": "from(bucket: \"waf_data\")\r\n  |> range(start: -1h) \r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"waf_stats\")  \r\n  |> filter(fn: (r) => r[\"_field\"] == \"count\")           \r\n  |> group()                                            \r\n  |> sum()\r\n\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Attacks Last 1H",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 6,
+      "panels": [],
+      "title": "Forensics analysis",
+      "type": "row"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 9,
+      "options": {
+        "code": {
+          "language": "html",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"text-align:center;\">\n <h1> 🔍 Web Attack Analysis & Predictions (Last 24 hours)</h2>\n\n</div>\n\n  <h4>🛡️ ${PREDICTIONS} </h4>\n\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.0.0-86898",
+      "repeat": "PREDICTIONS",
+      "repeatDirection": "h",
+      "title": "Analysis and Predictions",
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 5,
+      "panels": [],
+      "title": "Logs Data",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "beeriqsgfmtxcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 62,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 30
+              },
+              {
+                "color": "orange",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 19,
+        "w": 17,
+        "x": 0,
+        "y": 17
+      },
+      "id": 7,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "colorByField": "Attack_typeIs",
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "Attack_typeIs",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "12.0.0-86898",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "beeriqsgfmtxcb"
+          },
+          "query": "from(bucket: \"waf_data\")\r\n  |> range(start: -365d)  \r\n  |> filter(fn: (r) => r._measurement == \"waf_stats\") \r\n  |> filter(fn: (r) => r.type == \"attack_type\")\r\n  |> filter(fn: (r) => r.value != \"Unclassified\")\r\n  |> filter(fn: (r) => r.value != \"Scanner Detection\")\r\n  |> filter(fn: (r) => r.value != \"Brute Force\")\r\n  |> filter(fn: (r) => r._field == \"count\")\r\n  |> group(columns: [\"value\"])\r\n  |> sum()\r\n  |> sort(columns: [\"_value\"], desc: true)\r\n  |> map(fn: (r) => ({\r\n      Attack_typeIs: r.value,  \r\n      CountOfAttacks: r._value  \r\n    }))\r\n  |> drop(columns: [\"_start\", \"_stop\", \"_time\", \"_field\", \"_measurement\", \"value\", \"type\"]) \r\n  |> yield(name: \"top_attacks\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Top Attacks of all time",
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "uid": "beeriqsgfmtxcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AttacksFrom Egypt"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "AttacksFrom Canada"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Attacks From Egypt"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Attacks From Canada"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Attacks From Local"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 19,
+        "w": 7,
+        "x": 17,
+        "y": 17
+      },
+      "id": 3,
+      "options": {
+        "displayLabels": [
+          "name"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0-86898",
+      "targets": [
+        {
+          "query": "from(bucket: \"waf_data\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"waf_countries\")\r\n  |> group(columns: [\"country\", \"attack_type\"])\r\n  |> sum()\r\n  |> map(fn: (r) => ({r with \"Attacks From\": r._value}))  \r\n  |> group(columns: [\"country\"])\r\n  |> top(n: 5, columns: [\"Attacks From\"])\r\n  |> sort(columns: [\"country\", \"Attacks From\"], desc: true)\r\n  |> drop(columns: [\"_value\"])\r\n  |> yield(name: \"attack_types_by_country\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Attack types by country",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "beeriqsgfmtxcb"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 2,
+            "pointSize": 8,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [
+            "count"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0-86898",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "beeriqsgfmtxcb"
+          },
+          "query": "from(bucket: \"waf_data\")\r\n|> range(start: -90d)\r\n|> filter(fn: (r) => r._measurement == \"waf_stats\")\r\n|> filter(fn: (r) => r._field == \"count\")\r\n|> filter(fn: (r) => r.severity != \"INFO\")\r\n|> filter(fn: (r) => r.type == \"attack_type\")\r\n|> filter(fn: (r) => r.value != \" \")\r\n|> map(fn: (r) => ({\r\n      r with \r\n      attack_label: r.severity + \" | \" + r.type + \" | Rule \" + r.value\r\n   }))\r\n|> group(columns: [\"attack_label\"])\r\n|> aggregateWindow(every: 5m, fn: count, createEmpty: false)\r\n|> yield(name: \"count\")\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Last Critical Attacks (24 H)",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "refresh": "10s",
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "WAF Security Report\n\n*   **Incident Summary**:\n    *   PHP Injection: 1 attempt\n    *   XSS: 1 attempt\n    *   Local File Inclusion: 1 attempt\n\n*   **Critical Findings**:\n    *   All attacks were categorized as CRITICAL and intercepted by the WAF.\n    *   Multiple vulnerability types were targeted (PHP Injection, XSS, and Local File Inclusion), suggesting a broad probing attempt.\n\n*   **Attack Patterns**:\n    *   Source IP is \"unknown\" for all attacks. Requires further investigation into WAF logging configuration.\n    *   Attacks occurred within a 24-hour window, with specific timestamps provided in the logs.\n    *   Target URIs included common attack vectors such as query parameters (?cmd, ?q, ?param).\n\n*   **7-Day Threat Forecast**:\n    *   Based on the single day of data, a precise forecast is difficult. Assuming the current level continues, we can expect similar sporadic attacks.\n    *   Estimated change: +0% (No change from current level).\n    *   Confidence level: Low. Data is insufficient for accurate prediction.\n\n*   **Actionable Recommendations**:\n    *   1. Investigate why the source IP is \"unknown\" in the logs and correct WAF logging configuration to capture the true origin IP addresses.\n    *   2. Review and strengthen WAF rules related to PHP Injection, XSS, and Local File Inclusion to address the specific attack vectors observed.\n    *   3. Implement input validation and sanitization on the targeted URI parameters (cmd, q, param) to prevent exploitation of these vulnerabilities.\n\nAnalysis Timestamp (UTC): 2025-05-02 03:10:08\n",
+          "value": "WAF Security Report\n\n*   **Incident Summary**:\n    *   PHP Injection: 1 attempt\n    *   XSS: 1 attempt\n    *   Local File Inclusion: 1 attempt\n\n*   **Critical Findings**:\n    *   All attacks were categorized as CRITICAL and intercepted by the WAF.\n    *   Multiple vulnerability types were targeted (PHP Injection, XSS, and Local File Inclusion), suggesting a broad probing attempt.\n\n*   **Attack Patterns**:\n    *   Source IP is \"unknown\" for all attacks. Requires further investigation into WAF logging configuration.\n    *   Attacks occurred within a 24-hour window, with specific timestamps provided in the logs.\n    *   Target URIs included common attack vectors such as query parameters (?cmd, ?q, ?param).\n\n*   **7-Day Threat Forecast**:\n    *   Based on the single day of data, a precise forecast is difficult. Assuming the current level continues, we can expect similar sporadic attacks.\n    *   Estimated change: +0% (No change from current level).\n    *   Confidence level: Low. Data is insufficient for accurate prediction.\n\n*   **Actionable Recommendations**:\n    *   1. Investigate why the source IP is \"unknown\" in the logs and correct WAF logging configuration to capture the true origin IP addresses.\n    *   2. Review and strengthen WAF rules related to PHP Injection, XSS, and Local File Inclusion to address the specific attack vectors observed.\n    *   3. Implement input validation and sanitization on the targeted URI parameters (cmd, q, param) to prevent exploitation of these vulnerabilities.\n\nAnalysis Timestamp (UTC): 2025-05-02 03:10:08\n"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "beeriqsgfmtxcb"
+        },
+        "definition": "from(bucket: \"waf_predictions\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ai_analysis\")\r\n  |> filter(fn: (r) => r._field == \"summary\")\r\n  |> last()\r\n  |> map(fn: (r) => ({ _value: r._value }))\r\n",
+        "name": "PREDICTIONS",
+        "options": [],
+        "query": {
+          "query": "from(bucket: \"waf_predictions\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r._measurement == \"ai_analysis\")\r\n  |> filter(fn: (r) => r._field == \"summary\")\r\n  |> last()\r\n  |> map(fn: (r) => ({ _value: r._value }))\r\n"
+        },
+        "refresh": 2,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "ForenWAF",
+  "uid": "eeewfawdsi680f",
+  "version": 78
+}
