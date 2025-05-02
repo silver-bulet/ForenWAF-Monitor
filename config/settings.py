@@ -18,6 +18,6 @@ class Settings:
     # Settings ModSecurity
     LOG_PATH = os.getenv("MODSEC_LOG_PATH", "/var/log/modsec_audit.json")
     TIMEZONE = os.getenv("TIMEZONE", "UTC")
-    POLL_INTERVAL = int(os.getenv("POLL_INTERVAL", "60"))
+    POLL_INTERVAL = int(os.getenv("POLL_INTERVAL") or 20)
 
 settings = Settings()
