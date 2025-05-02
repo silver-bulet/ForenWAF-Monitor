@@ -53,7 +53,14 @@ def main():
             if logs:
                 exported = influx.export_log_entries(logs)
                 logger.debug(f"Exported {len(logs)} logs")  # Reduced verbosity
-
+         # Optional: Run Gemini analysis on recent logs
+        if settings.RUN_INITIAL_ANALYSIS and exported > 0:
+            logger.info("Running Gemini analysis on latest data...")
+            analysis_result = analyzer.analyze_last_24h(influx)
+            if analysis_result:
+                influx.save_analysis_result(analysis_result)
+                logger.info("Gemini analysis result saved.")
+                
             # Periodic analysis (every 24 hours)
             current_time = time.time()
             if current_time - last_analysis_time >= 86400:
