@@ -25,6 +25,8 @@ Before running the installation script, ensure your system meets the following r
     *   All Python files (`main.py`, `settings.py`, `modsecurity.py`, etc.)
     *   `requirements.txt`
     *   `install.sh` (this installation script)
+    *   `run_ai_report.sh` (AI report trigger script)
+    *   `grafana/forenwaf_dashboard.json` (optional preconfigured Grafana dashboard)
     Place all these files in a single directory on the target server.
 
 2.  **Make Script Executable:** Open a terminal, navigate to the directory containing the files, and run:
@@ -47,10 +49,16 @@ Before running the installation script, ensure your system meets the following r
         *   Your InfluxDB Token (input will be hidden).
         *   Your Google Gemini API Key (input will be hidden).
         *   The path to your ModSecurity JSON audit log file (defaults to `/var/log/modsec_audit.json`).
+        *   Your InfluxDB Organization (default: `ForenWAF`).
+        *   Your InfluxDB Data Bucket name (default: `waf_data`).
+        *   Your InfluxDB Predictions Bucket name (default: `waf_predictions`).
+        *   Polling interval in seconds (default: `10`).
     *   It will create the `.env` configuration file with the details you provide.
     *   It will set appropriate file permissions.
     *   It will create and enable a systemd service file (`forenwaf_monitor.service`).
     *   It will start the service and display its status.
+    *   It will warn you that changing default bucket names may cause issues with the Grafana dashboard.
+    *   It will install a convenient AI report trigger script to `/usr/local/bin/run_ai_report.sh`.
 
 ## Post-Installation
 
@@ -86,6 +94,31 @@ Before running the installation script, ensure your system meets the following r
     ```bash
     sudo systemctl restart forenwaf_monitor.service
     ```
+
+5.  **Manual AI Report Trigger:**
+    You can manually generate a new Gemini AI analysis report at any time using:
+    ```bash
+    sudo run_ai_report.sh
+    ```
+    This script will:
+    - Delete the `last_position.json` file to reset log parsing
+    - Restart the ForenWAF Monitor service
+    - Trigger a fresh Gemini AI analysis on the most recent logs
+
+6.  **Grafana Dashboard Import (Optional):**
+
+    If you're using Grafana, you can import a preconfigured dashboard from the project to visualize WAF attack data.
+
+    **To import the dashboard:**
+    1. Open Grafana and go to `Dashboards → Import`
+    2. Click "Upload JSON file"
+    3. Choose the file: `grafana/forenwaf_dashboard.json`
+    4. Select the InfluxDB data source you created
+    5. Click **Import**
+
+    > ⚠️ Warning: If you changed the default bucket names (`waf_data`, `waf_predictions`), you may need to manually update the dashboard queries to match your new configuration.
+
+    The dashboard will provide insights on top attack types, critical events, and Gemini AI summaries.
 
 ## Uninstallation (Manual)
 
