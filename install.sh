@@ -113,6 +113,8 @@ echo_info "Creating .env configuration file..."
 # Prompt user for essential variables
 read -p "Enter InfluxDB URL: " INFLUX_URL
 read -s -p "Enter InfluxDB Token: " INFLUX_TOKEN
+echo_warn "⚠️ Warning: Changing the default bucket names (waf_data, waf_predictions) may break the Grafana dashboard."
+echo_warn "If you customize them, you must also update the dashboard JSON accordingly."
 read -p "Enter InfluxDB Org [default: ForenWAF]: " INFLUX_ORG
 INFLUX_ORG=${INFLUX_ORG:-ForenWAF}
 read -p "Enter InfluxDB Bucket Name [default: waf_data]: " INFLUX_BUCKET
