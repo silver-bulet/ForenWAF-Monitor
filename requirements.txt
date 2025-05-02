@@ -1,0 +1,6 @@
+python-dotenv
+pytz
+requests
+influxdb-client
+pandas
+google-generativeai
