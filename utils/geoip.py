@@ -34,15 +34,15 @@ class GeoIPLookup:
 
         try:
             response = requests.get(
-                f'http://ip-api.com/json/{ip_address}?fields=status,countryCode,country',
+                f'https://ipwho.is/{ip-address}?fields=success,country_code,country',
                 timeout=2
             )
 
             if response.status_code == 200:
                 data = response.json()
-                if data.get('status') == 'success':
+                if data.get('success') == 'true':
                     result = {
-                        "code": data.get('countryCode', 'XX'),
+                        "code": data.get('country_code', 'XX'),
                         "name": data.get('country', 'Unknown')
                     }
                     self._add_to_cache(ip_address, result)
