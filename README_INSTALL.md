@@ -112,7 +112,7 @@ Before running the installation script, ensure your system meets the following r
     **To import the dashboard:**
     1. Open Grafana and go to `Dashboards → Import`
     2. Click "Upload JSON file"
-    3. Choose the file: `grafana/forenwaf_dashboard.json`
+    3. Choose the file: `grafana/forenwaf_orginal.json`
     4. Select the InfluxDB data source you created
     5. Click **Import**
 
